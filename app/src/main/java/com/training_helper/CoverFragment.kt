@@ -32,10 +32,6 @@ class CoverFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        binding.buttonFirst.setOnClickListener {
-//            findNavController().navigate(R.id.action_cover_to_FirstFragment)
-//        }
-
         val timer = object: CountDownTimer(3000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
             }
