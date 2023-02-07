@@ -49,8 +49,9 @@ class FirstFragment : Fragment(), IOBackPressed {
         val button: ImageView = view.findViewById<ImageView>(R.id.playButton)
         var timeGear: ImageView = view.findViewById<ImageView>(R.id.timeGear)
         var setGear: ImageView = view.findViewById<ImageView>(R.id.setGear)
+        var restTime: TextView = view.findViewById(R.id.restTime)
 
-        buttonAnimation.buttonEffect(button, timeGear, setGear)
+        buttonAnimation.buttonEffect(button, timeGear, setGear, restTime)
 
         val listContainer: LinearLayout = view.findViewById<LinearLayout>(R.id.setContainer)
         val textView: TextView = TextView(view.context)
