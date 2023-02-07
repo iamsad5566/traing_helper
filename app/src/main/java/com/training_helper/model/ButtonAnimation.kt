@@ -1,5 +1,6 @@
 package com.training_helper.model
 
+import android.annotation.SuppressLint
 import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
@@ -9,11 +10,14 @@ import com.training_helper.R
 class ButtonAnimation() {
     var turning: Boolean = false
 
-
-    fun buttonEffect(button: View, timeGear: View, setGear: View, restTime: TextView) {
-        var timeGearTurning = object : CountDownTimer(60000, 10) {
+    fun buttonEffect(button: View, timeGear: View, setGear: View, restTime: TextView, counter: Long) {
+        var cpCounter: Long = counter
+        var timeGearTurning = object : CountDownTimer(counter, 10) {
             override fun onTick(millisUntilFinished: Long) {
                 timeGear.rotation += 0.3f
+                if (cpCounter == 0L) {
+                    this.cancel()
+                }
             }
 
             override fun onFinish() {
@@ -21,9 +25,12 @@ class ButtonAnimation() {
             }
         }
 
-        var setGearTurning = object : CountDownTimer(60000, 10) {
+        var setGearTurning = object : CountDownTimer(counter, 10) {
             override fun onTick(millisUntilFinished: Long) {
                 setGear.rotation -= 0.45f
+                if (cpCounter == 0L) {
+                    this.cancel()
+                }
             }
 
             override fun onFinish() {
@@ -31,13 +38,19 @@ class ButtonAnimation() {
             }
         }
 
-        var setRestTime = object : CountDownTimer(60000, 1000) {
+        var setRestTime = object : CountDownTimer(cpCounter, 1000) {
+            @SuppressLint("SetTextI18n")
             override fun onTick(p0: Long) {
-                restTime.text = "0:${(p0/1000).toString()}"
+                cpCounter -= 1000
+                if (cpCounter == 0L) {
+                    button.setBackgroundResource(R.drawable.play)
+                    this.cancel()
+                }
+                restTime.text =
+                    "0:${if (cpCounter / 1000 >= 10) cpCounter / 1000 else "0" + (cpCounter / 1000).toString()}"
             }
 
             override fun onFinish() {
-                button.setBackgroundResource(R.drawable.play)
             }
         }
 

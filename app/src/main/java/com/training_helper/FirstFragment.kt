@@ -1,5 +1,6 @@
 package com.training_helper
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -50,13 +51,16 @@ class FirstFragment : Fragment(), IOBackPressed {
         var timeGear: ImageView = view.findViewById<ImageView>(R.id.timeGear)
         var setGear: ImageView = view.findViewById<ImageView>(R.id.setGear)
         var restTime: TextView = view.findViewById(R.id.restTime)
+        var counter: Long = 60000
 
-        buttonAnimation.buttonEffect(button, timeGear, setGear, restTime)
+        buttonAnimation.buttonEffect(button, timeGear, setGear, restTime, counter)
 
         val listContainer: LinearLayout = view.findViewById<LinearLayout>(R.id.setContainer)
         val textView: TextView = TextView(view.context)
-        textView.text = "test_F_line"
-        textView.setPadding(10)
+        textView.text = "test_F_line1"
+        textView.setTypeface(Typeface.MONOSPACE, Typeface.BOLD)
+        textView.setPadding(20)
+        textView.textSize = 20F
         textView.gravity = Gravity.LEFT
         listContainer.addView(textView)
     }

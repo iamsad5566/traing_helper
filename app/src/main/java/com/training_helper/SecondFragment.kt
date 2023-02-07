@@ -1,11 +1,13 @@
 package com.training_helper
 
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.training_helper.database.TrainingSet
 import com.training_helper.databinding.FragmentSecondBinding
 
 /**
@@ -14,6 +16,7 @@ import com.training_helper.databinding.FragmentSecondBinding
 class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
+    lateinit var trainingSet: SQLiteDatabase
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -25,12 +28,14 @@ class SecondFragment : Fragment() {
     ): View? {
 
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
+
         return binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        trainingSet = TrainingSet(view.context).writableDatabase
 
         binding.buttonSecond.setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
